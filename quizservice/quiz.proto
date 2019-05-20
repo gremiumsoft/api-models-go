@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package quiz;
+
+service QuizService {
+
+    rpc GetQuestions(QuizRequest) returns (QuestionQuizList) {}
+}
+
+message QuizRequest {
+    int32 offset = 1;
+}
+
+message QuestionQuizList {
+    repeated QuizQuestion quiz_question = 1;
+}
+
+message QuizQuestion {
+    string id = 1;
+    string question = 2;
+    repeated string answers = 3;
+
+    // We need to think about it. If we send the data to a client
+    // then it's "very" easy to cheat
+    int32 correct_answer_idx = 4;
+}
